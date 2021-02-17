@@ -10,16 +10,7 @@ import ReactDOM from "react-dom";
 		</div>
 	);
 }*/
-const initialList = [
-	{
-		id: "a",
-		name: "Robin"
-	},
-	{
-		id: "b",
-		name: "Dennis"
-	}
-];
+const initialList = [];
 
 export default function InputTask() {
 	const [list, setList] = React.useState(initialList);
@@ -45,8 +36,8 @@ export default function InputTask() {
 			</div>
 
 			<ul>
-				{list.map(item => (
-					<li key={item.id}>{item.name}</li>
+				{list.map(i => (
+					<li key={i.index}>{i.name}</li>
 				))}
 			</ul>
 		</div>

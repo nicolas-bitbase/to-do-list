@@ -9,7 +9,6 @@ export function Home() {
 		<div className="text-center mt-5">
 			<h1>To do List</h1>
 			<InputTask />
-
 			<span>
 				<TasksCounter />
 			</span>
