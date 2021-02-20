@@ -6,13 +6,12 @@ import InputTask from "./inputtask.js";
 //create your first component
 export function Home() {
 	return (
-		<div className="text-center mt-5">
-			<h1>To do List</h1>
-			<InputTask />
-			<span>
-				<TasksCounter />
-			</span>
-		</div>
+		<body>
+			<div className="container1">
+				<h1>To do List</h1>
+				<InputTask />
+			</div>
+		</body>
 	);
 }
 

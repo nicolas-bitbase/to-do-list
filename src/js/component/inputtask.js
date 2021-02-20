@@ -1,45 +1,67 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-
-/*export default function InputTask() {
-	const [input, setInput] = useState("");
-	console.log(input);
-	return (
-		<div>
-			<input value={input} onInput={e => setInput(e.target.value)} />
-		</div>
-	);
-}*/
-const initialList = [];
+import TasksCounter from "./tasksleft.js";
+import PropTypes from "prop-types";
 
 export default function InputTask() {
-	const [list, setList] = React.useState(initialList);
-	const [name, setName] = React.useState("");
+	const [tasksList, setTasksList] = React.useState([]);
+	const [task, setTask] = React.useState("");
+	//const [liNewTask, setLiNewTask] = React.useState(null);
 
-	function handleChange(event) {
-		setName(event.target.value);
+	function addTask() {
+		//	let newList = tasksList.push(task);
+		let newList = [...tasksList, task];
+
+		setTasksList(newList);
+		console.log(tasksList.indexOf(task));
+		setTask("");
 	}
 
-	function handleAdd() {
-		const newList = list.concat({ name });
+	/*function deleteTask(index) {
+		const newList = tasksList.splice(index, 1);
+		console.log(newList, tasksList);
 
-		setList(newList);
+		setTasksList(tasksList);
+    }*/
+
+	function deleteTask(tasksListIndex) {
+		const newList = tasksList.filter(
+			(_, index) => index !== tasksListIndex
+		);
+
+		setTasksList(newList);
 	}
 
+	//useEffect(() => {
+	const liNewTask = tasksList.map((eachTask, index) => {
+		return (
+			<div className="task" key={index}>
+				<div className="">
+					{eachTask}
+					<button onClick={() => deleteTask(index)}>x</button>
+				</div>
+			</div>
+		);
+	});
+	//setLiNewTask(newTask);
+	//});
 	return (
 		<div>
 			<div>
-				<input type="text" value={name} onChange={handleChange} />
-				<button type="button" onClick={handleAdd}>
+				<input
+					value={task}
+					type="text"
+					onChange={event => {
+						setTask(event.target.value);
+					}}
+				/>
+				<button type="button" onClick={addTask}>
 					Add
 				</button>
 			</div>
 
-			<ul>
-				{list.map(i => (
-					<li key={i.index}>{i.name}</li>
-				))}
-			</ul>
+			<div className="container2">{liNewTask}</div>
+			<TasksCounter tasksLength={tasksList.length} />
 		</div>
 	);
 }
